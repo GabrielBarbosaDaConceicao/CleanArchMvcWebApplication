@@ -1,12 +1,40 @@
-﻿using System.Collections.Generic;
+﻿using CleanArchMvc.Domain.Validation;
+using System.Collections.Generic;
 
 namespace CleanArchMvc.Domain.Entities
 {
-    public class Category
+    public sealed class Category : BaseEntity
     {
-        public int Id { get; set; }
-        public string? Name { get; set; }
+        public string Name { get; private set; }
 
         public ICollection<Product> Products { get; set; }
+
+        public Category(string name)
+        {
+            ValidateDomain(name);
+        }
+
+        public Category(int id, string name) : this(name)
+        {
+            DomainValidationException.When(id < 0, "Invalid Id. Id is required.");
+            Id = id;
+            ValidateDomain(name);
+        }
+
+        private void ValidateDomain(string name)
+        {
+            DomainValidationException.When(string.IsNullOrEmpty(name), 
+                "Invalid name. Name is required.");
+
+            DomainValidationException.When(name.Length < 3, 
+                "Invalid name, too short, minimum 3 characters.");
+
+            Name = name;
+        }
+
+        public void Update(string name)
+        {
+            ValidateDomain(name);
+        }   
     }
 }
