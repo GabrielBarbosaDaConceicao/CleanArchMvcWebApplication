@@ -18,6 +18,8 @@ namespace CleanArchMvc.Infra.IoC
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
 
+            //services.AddAutoMapper(typeof(DependencyInjection));
+
             return services;
         }
     }
