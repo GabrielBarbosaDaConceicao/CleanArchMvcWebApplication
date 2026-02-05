@@ -1,5 +1,6 @@
 ﻿using CleanArchMvc.Application.Interfaces;
 using CleanArchMvc.Application.Mappings;
+using CleanArchMvc.Application.Products.Handlers;
 using CleanArchMvc.Application.Services;
 using CleanArchMvc.Domain.Interfaces;
 using CleanArchMvc.Infra.Data.Context;
@@ -25,6 +26,10 @@ namespace CleanArchMvc.Infra.IoC
             services.AddScoped<IProductService, ProductService>();
             
             services.AddAutoMapper(cfg => cfg.AddProfile<DomainToDtoMappingProfile>());
+            services.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssemblyContaining<ProductCreateCommandHandler>();
+            });
 
             return services;
         }
