@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CleanArchMvc.Application.DTOs
 {
-    public class ProductDto
+    public sealed class ProductDto
     {
         public int Id { get; set; }
 
