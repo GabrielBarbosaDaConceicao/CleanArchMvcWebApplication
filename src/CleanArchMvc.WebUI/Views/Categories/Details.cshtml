@@ -1,0 +1,33 @@
+﻿@model CategoryDto
+
+@{
+    ViewData["Title"] = "Category Details";
+}
+
+<h3>
+    @ViewData["Title"]
+</h3>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" title="Edit Category" class="btn btn-primary">
+        <span class="fas fa-edit"></span>
+    </a>
+    <a asp-action="Delete" asp-route-id="@Model.Id" title="Delete Category" class="btn btn-danger">
+        <span class="fas fa-trash-alt"></span>
+    </a>
+    <a asp-action="Index" title="Return to Categories" class="btn btn-info">
+        <span class="fas fa-arrow-circle-left"></span>
+    </a>
+</div>

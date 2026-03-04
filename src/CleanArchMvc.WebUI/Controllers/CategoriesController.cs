@@ -37,7 +37,7 @@ namespace CleanArchMvc.WebUI.Controllers
                 await _categoryService.Add(categoryDto);
                 return RedirectToAction(nameof(Index));
             }
-                
+
             return View(categoryDto);
         }
 
@@ -45,7 +45,7 @@ namespace CleanArchMvc.WebUI.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-                 return View("Error");
+                return View("Error");
 
             var categoryDto = await _categoryService.GetById(id);
 
@@ -63,7 +63,7 @@ namespace CleanArchMvc.WebUI.Controllers
                 try
                 {
                     await _categoryService.Update(categoryDto);
-                    
+
                 }
                 catch (Exception)
                 {
@@ -72,7 +72,44 @@ namespace CleanArchMvc.WebUI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-                
+
+            return View(categoryDto);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+                return View("Error");
+
+            var categoryDto = await _categoryService.GetById(id);
+
+            
+
+            return View(categoryDto);
+        }
+
+        [HttpPost(), ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int? id)
+        {
+            if (id == null)
+                return View("Error");
+
+            await _categoryService.Remove(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+                return View("Error");
+
+            var categoryDto = await _categoryService.GetById(id);
+
+            if (categoryDto == null)
+                return View("Error");
+
             return View(categoryDto);
         }
     }
